@@ -1,22 +1,31 @@
 (() => {
     "use strict";
 
-    const loadingTemplate = document.createElement("template");
-    loadingTemplate.innerHTML = `<div id="loading">Loading...</div>`;
-
     customElements.define("s1-person-overview", class extends HTMLElement {
         constructor() {
             super();
-            const observer = new MutationObserver((mutations) => {
-                const mutation = mutations.reverse().find((mutation) => {
-                    return "resource" === mutation.attributeName;
-                });
-                if (mutation) {
-                    this.render();
-                }
-            });
-            observer.observe(this, {attributes: true});
+            // Listening to changes with the MutationObserver
+            // const observer = new MutationObserver((mutations) => {
+            //     const mutation = mutations.find((mutation) => {
+            //         return "resource" === mutation.attributeName;
+            //     });
+            //     if (mutation) {
+            //         this.render();
+            //     }
+            // });
+            // observer.observe(this, {attributes: true});
             this.attachShadow({"mode": "open"});
+        }
+
+        static get observedAttributes() {
+            return ["resource"];
+        }
+
+        // like React's componentDidUpdate
+        attributeChangedCallback(attr, old, neww) {
+            if (old !== neww) {
+                this.render();
+            }
         }
 
         renderPerson(data) {
@@ -43,32 +52,31 @@
         }
 
         render() {
-            const loading = document.importNode(loadingTemplate.content, true);
-            this.shadowRoot.innerHTML = "";
-            this.shadowRoot.appendChild(loading);
+            this.shadowRoot.innerHTML = "Loading...";
 
             fetch(this.getAttribute("resource"))
                 .then((response) => response.json())
                 .then((data) => {
-                    window.requestAnimationFrame(() => {
-                        data.elements.forEach((thing) => {
-                            if ("person" === thing.class) {
-                                this.shadowRoot.appendChild(this.renderPerson(thing));
-                            }
-                            if ("widget" === thing.class && "person_article_list" === thing.type) {
-                                thing.elements.forEach((article) => {
-                                    this.shadowRoot.appendChild(this.renderTeaser(article));
-                                });
-                            }
-                        });
-                        this.shadowRoot.removeChild(this.shadowRoot.getElementById("loading"));
+                    data.elements.forEach((thing) => {
+                        if ("person" === thing.class) {
+                            this.shadowRoot.appendChild(this.renderPerson(thing));
+                        }
+                        if ("widget" === thing.class && "person_article_list" === thing.type) {
+                            thing.elements.forEach((article) => {
+                                this.shadowRoot.appendChild(this.renderTeaser(article));
+                            });
+                        }
                     });
+                    this.shadowRoot.removeChild(this.shadowRoot.firstChild);
                 })
-                .catch(console.error.bind(console));
+                .catch(() => {
+                    this.shadowRoot.innerHTML = `Everything's kaputt with ${this.getAttribute("resource")}`
+                });
         }
 
-        connectedCallback() {
-            this.render();
-        }
+        // Needed when using MutationObserver
+        // connectedCallback() {
+        //     this.render();
+        // }
     });
 })();

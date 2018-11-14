@@ -25,6 +25,7 @@
                 right: 0;
             }
             #name {
+                color: var(--teaser-name-color, black);
                 font-size: 1rem;
             }
             #pic {
@@ -46,8 +47,8 @@
 
         connectedCallback() {
             const teaser = document.importNode(teaserTemplate.content, true);
-            teaser.getElementById("name").innerHTML = this.getAttribute("name");
-            teaser.getElementById("desc").innerHTML = this.getAttribute("desc");
+            teaser.getElementById("name").innerText = this.getAttribute("name");
+            teaser.getElementById("desc").innerText = this.getAttribute("desc");
             teaser.getElementById("url").setAttribute("href", this.getAttribute("url"));
             teaser.getElementById("pic").setAttribute("src", this.getAttribute("pic"));
             teaser.getElementById("channel").setAttribute("src", this.getAttribute("channel"));

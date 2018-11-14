@@ -33,9 +33,9 @@
 
         connectedCallback() {
             const person = document.importNode(personTemplate.content, true);
-            person.getElementById("name").innerHTML = this.getAttribute("name");
+            person.getElementById("name").innerText = this.getAttribute("name");
             person.getElementById("pic").setAttribute("src", this.getAttribute("pic"));
-            person.getElementById("desc").innerHTML = this.getAttribute("desc");
+            person.getElementById("desc").innerText = this.getAttribute("desc");
 
             const style = document.importNode(styleTemplate.content, true);
             this.shadowRoot.appendChild(style);

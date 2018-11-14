@@ -1,16 +1,36 @@
 # S1 Custom Elements
 
+Playing around with custom elements and stuff. Start a simple server and
+try the HTMLses:
+
     $ python -m SimpleHTTPServer 8888
 
-## `<s1-person>` and `<s1-teaser>` as static examples
+## Read in the internets
 
-* http://localhost:8888/static.html
+* web components
+    * http://bit.ly/web-components-ijs
+    * https://github.com/webcomponents/gold-standard/wiki
+    * https://w3ctag.github.io/webcomponents-design-guidelines/
 
-## `<s1-person>` and `<s1-teaser>` dynamically used by `<s1-person-overview>`
+* custom elements
+    * https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements
 
-* http://localhost:8888/index.html
+* shadow DOM
+    * https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM
 
-## example API urls
+* template
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
 
-* https://www.sport1.de/fussball/person/thomas-muller.json
-* https://www.sport1.de/fussball/person/vedad-ibisevic.json
+* :host
+    * https://developer.mozilla.org/en-US/docs/Web/CSS/:host
+
+* CSS custom properties
+    * https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables
+
+* MutationObserver
+    * https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+
+## Benefits
+
+* Encapsulates styles without obfuscating the DOM
+* ...
