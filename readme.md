@@ -5,10 +5,18 @@ try the HTMLses:
 
     $ python -m SimpleHTTPServer 8888
 
+___
+
+## Context 
+* Talk that inspired this repo: 
+    * https://www.youtube.com/watch?v=hdSz1EKjK10 
+* slides of the talk: 
+    * http://bit.ly/web-components-ijs
+___
+
 ## Read in the internets
 
 * web components
-    * http://bit.ly/web-components-ijs
     * https://github.com/webcomponents/gold-standard/wiki
     * https://w3ctag.github.io/webcomponents-design-guidelines/
 
